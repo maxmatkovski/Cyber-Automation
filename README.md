@@ -38,7 +38,7 @@ This project demonstrates how modern AI agents can be built to augment security 
 
 ## 🔴 The Problem
 
-<img src="Images/image.png" alt="alt text" style="width:100%; height:300px; object-fit:cover;" />
+<img src="Images/image.png" alt="alt text" style="width:100%; height:400px; object-fit:cover;" />
 
 ### Current Challenges in Phishing Detection
 
