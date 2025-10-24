@@ -18,7 +18,6 @@ An AI-powered phishing detection and triage system that combines Large Language 
 - [Setup Instructions](#setup-instructions)
 - [Future Enhancements](#future-enhancements)
 - [Technologies Used](#technologies-used)
-
 ---
 ## 🎯 Introduction
 
