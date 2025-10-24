@@ -38,7 +38,7 @@ This project demonstrates how modern AI agents can be built to augment security 
 
 ## 🔴 The Problem
 
-![alt text](images/image.png)
+![alt text](Images/image.png)
 ### Current Challenges in Phishing Detection
 
 Modern phishing attacks have evolved far beyond simple spam filters can handle:
