@@ -5,7 +5,7 @@
 An AI-powered phishing detection and triage system that combines Large Language Model (LLM) analysis with external threat intelligence to automatically identify, assess, and classify sophisticated phishing attacks.
 
 ---
-
+![alt text](<Images/Image1.png>)
 ## 📋 Table of Contents
 
 - [Introduction](#introduction)
