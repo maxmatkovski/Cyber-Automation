@@ -5,7 +5,7 @@
 An AI-powered phishing detection and triage system that combines Large Language Model (LLM) analysis with external threat intelligence to automatically identify, assess, and classify sophisticated phishing attacks.
 
 ---
-![alt text](<Images/Image1.png>)
+![alt text](<Images/Image2.png>)
 ## 📋 Table of Contents
 
 - [Introduction](#introduction)
@@ -20,7 +20,6 @@ An AI-powered phishing detection and triage system that combines Large Language 
 - [Technologies Used](#technologies-used)
 
 ---
-
 ## 🎯 Introduction
 
 DREAM Phishing Detector is an intelligent security automation system designed to protect organizations from increasingly sophisticated phishing attacks. By combining the reasoning capabilities of Claude AI with real-time threat intelligence from VirusTotal, the system provides automated, accurate, and explainable phishing detection.
