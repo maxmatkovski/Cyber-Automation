@@ -165,6 +165,10 @@ Extract URLs and provide threat score (0-100).
 - Gmail node sends consolidated alert to SOC team
 - Includes threat scores, verdicts, and reasoning
 
+Example of what a generated threat report looks like.
+![Threat Report](Images/Image4.png)
+
+
 ### Pros
 - ✅ Explicit control over workflow logic
 - ✅ Easy to debug and visualize
@@ -445,8 +449,8 @@ MIT License - See LICENSE file for details
 ## 📞 Contact
 
 - GitHub Issues: Report bugs and request features
-- Email: [your-email]
-- LinkedIn: [your-profile]
+- Email: [[your-email](maxmatkovski@gatech.edu)]
+- LinkedIn: [[Max Matkovski](https://www.linkedin.com/in/maxmatkovski/)]
 
 ---
 
