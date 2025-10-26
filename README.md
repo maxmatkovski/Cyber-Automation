@@ -1,823 +1,451 @@
-# 🚨 DREAM Phishing Detector
+# 🚨 AI Phishing Detector
 
-**D**etection **R**easoning **E**nrichment **A**utomated **M**onitoring
-
-An AI-powered phishing detection and triage system that combines Large Language Model (LLM) analysis with external threat intelligence to automatically identify, assess, and classify sophisticated phishing attacks.
+An AI-powered phishing detection system that combines Claude AI with VirusTotal threat intelligence to automatically identify and classify sophisticated phishing attacks.
 
 ---
-![alt text](<Images/Image2.png>)
+
 ## 📋 Table of Contents
 
-- [Introduction](#introduction)
-- [The Problem](#the-problem)
-- [The Solution](#the-solution)
-- [Architecture](#architecture)
-- [Technical Implementation](#technical-implementation)
-- [System Components](#system-components)
-- [Workflow Breakdown](#workflow-breakdown)
-- [Setup Instructions](#setup-instructions)
-- [Future Enhancements](#future-enhancements)
-- [Technologies Used](#technologies-used)
+- [🎯 Introduction](#-introduction)
+- [🔴 The Problem](#-the-problem)
+- [✅ The Solution](#-the-solution)
+- [🏗️ Architecture Overview](#️-architecture-overview)
+- [🤖 Implementation Approaches](#-implementation-approaches)
+  - [Version 1: Orchestrated Workflow](#version-1-orchestrated-workflow)
+  - [Version 2: MCP Agent](#version-2-mcp-agent)
+- [🚀 Setup Guide](#-setup-guide)
+- [📊 Performance](#-performance)
+- [🔮 Future Enhancements](#-future-enhancements)
+
 ---
+
 ## 🎯 Introduction
 
-DREAM Phishing Detector is an intelligent security automation system designed to protect organizations from increasingly sophisticated phishing attacks. By combining the reasoning capabilities of Claude AI with real-time threat intelligence from VirusTotal, the system provides automated, accurate, and explainable phishing detection.
-
-This project demonstrates how modern AI agents can be built to augment security operations center (SOC) workflows, reducing analyst workload while maintaining high detection accuracy and providing full transparency in decision-making.
+AI Phishing Detector is an intelligent security automation system that protects organizations from sophisticated phishing attacks. It combines Claude AI's contextual understanding with VirusTotal's threat intelligence to provide automated, accurate, and explainable threat detection.
 
 ### Key Features
 
-- **Automated Email Monitoring**: Continuous surveillance of incoming emails
-- **AI-Powered Analysis**: Advanced threat assessment using Claude 4 Sonnet
-- **External Threat Intelligence**: Real-time domain reputation checks via VirusTotal
-- **Multi-Step Reasoning**: Agent-style workflow that analyzes, enriches, and re-evaluates
-- **Intelligent Routing**: Risk-based decision logic for threat prioritization
-- **Explainable Results**: Detailed reasoning for every detection decision
+- **Automated Email Monitoring** - Continuous surveillance every 6 hours
+- **AI-Powered Analysis** - Claude 4 Sonnet analyzes context and intent
+- **External Threat Intelligence** - Real-time domain reputation via VirusTotal
+- **Multi-Step Reasoning** - Analyzes, enriches with data, re-evaluates
+- **Explainable Results** - Full reasoning for every decision
 
 ---
 
 ## 🔴 The Problem
 
-<img src="Images/image.png" alt="alt text" style="width:100%; height:400px; object-fit:cover;" />
+Modern phishing attacks bypass traditional defenses through:
 
-### Current Challenges in Phishing Detection
+1. **Sophisticated Social Engineering** - Personalized, context-aware messages
+2. **Domain Spoofing** - Lookalike domains and compromised accounts
+3. **Zero-Day Threats** - New campaigns with no prior signatures
+4. **Analyst Fatigue** - Manual triage can't scale with volume
+5. **Time Sensitivity** - Minutes matter in preventing damage
 
-Modern phishing attacks have evolved far beyond simple spam filters can handle:
+### Why Traditional Systems Fail
 
-1. **Sophisticated Social Engineering**: Attackers use personalized, context-aware messages that mimic legitimate communications
-2. **Domain Spoofing**: Use of lookalike domains and compromised legitimate domains
-3. **Zero-Day Threats**: New phishing campaigns with no prior threat intelligence
-4. **Analyst Fatigue**: Security teams overwhelmed by false positives and manual triage
-5. **Time-Sensitive Nature**: Phishing attacks require immediate response before damage occurs
+**Rule-Based Systems**: Can't adapt to new patterns, high false positives  
+**Basic ML Models**: Lack context, can't explain decisions  
+**Manual Analysis**: Too slow, inconsistent, expensive
 
-### Traditional Detection Limitations
-
-**Rule-Based Systems:**
-- Cannot adapt to new attack patterns
-- High false positive rates
-- Require constant manual updating
-- Miss sophisticated social engineering tactics
-
-**Basic ML Models:**
-- Lack contextual understanding
-- Cannot explain decisions
-- Require extensive labeled training data
-- Struggle with novel attack vectors
-
-**Manual Analysis:**
-- Too slow for real-time threats
-- Inconsistent between analysts
-- Expensive and resource-intensive
-- Cannot scale with email volume
-
-### The Gap
-
-Organizations need a system that:
-- Understands context and intent (like a human analyst)
-- Leverages real-time threat intelligence
-- Makes explainable decisions
-- Operates autonomously 24/7
-- Adapts to new attack patterns
+Organizations need a system that understands context like a human analyst, leverages real-time threat intelligence, and operates autonomously 24/7.
 
 ---
 
 ## ✅ The Solution
 
-DREAM Phishing Detector bridges this gap by implementing an **AI agent workflow** that combines:
+AI Phishing Detector bridges this gap with two implementation approaches:
 
-1. **Natural Language Understanding**: Claude AI analyzes email content, context, and intent
-2. **External Tool Integration**: Automated checks against threat intelligence databases
-3. **Multi-Step Reasoning**: Initial analysis → Tool use → Re-evaluation with enriched data
-4. **Explainable AI**: Every decision includes detailed reasoning and evidence
-5. **Risk-Based Routing**: Intelligent prioritization based on threat severity
+### Core Capabilities
 
-### How It Works (High-Level)
-
-```
-📧 Email Arrives
-    ↓
-🤖 Claude Analyzes Email
-    ↓
-📊 Threat Score Generated
-    ↓
-⚡ IF High Risk (≥60/100)
-    ↓
-🔍 VirusTotal Checks Domain
-    ↓
-🧠 Claude Re-Analyzes with Real Data
-    ↓
-✅ Final Verdict: Block/Quarantine/Allow
-    ↓
-📝 Generate Detailed Report
-```
-
-### Why This Approach Works
-
-**Contextual Understanding**: Claude processes emails like a human analyst, understanding nuanced social engineering tactics
-
-**Evidence-Based Decisions**: VirusTotal provides objective, crowd-sourced threat intelligence from 95+ security engines
-
-**Adaptive Intelligence**: The system learns from each analysis, improving detection without manual retraining
-
-**Transparency**: Every decision includes specific indicators and reasoning, enabling SOC teams to verify and learn
+1. **Natural Language Understanding** - Claude analyzes email content and intent
+2. **External Tool Integration** - Automated checks against threat databases
+3. **Multi-Step Reasoning** - Initial analysis → Tool use → Re-evaluation
+4. **Explainable AI** - Every decision includes detailed reasoning
+5. **Risk-Based Routing** - Intelligent prioritization by threat level
 
 ---
 
-## 🏗️ Architecture
-
-### System Design
+## 🏗️ Architecture Overview
 
 ```
-┌─────────────────────────────────────────────────────────────┐
-│                     DREAM PHISHING DETECTOR                  │
-└─────────────────────────────────────────────────────────────┘
-
-┌──────────────┐
-│   Stage 1    │  Email Ingestion
-│   Gmail API  │  • Fetches unread emails every 5 minutes
-│              │  • Filters for new messages only
-└──────┬───────┘
-       │
-       ▼
-┌──────────────┐
-│   Stage 2    │  AI Analysis (Initial)
-│  Claude 4    │  • Extracts URLs, domains, sender info
-│   Sonnet     │  • Identifies phishing indicators
-│              │  • Calculates threat score (0-100)
-│              │  • Generates risk level & recommendation
-└──────┬───────┘
-       │
-       ▼
-┌──────────────┐
-│   Stage 3    │  Decision Logic
-│  IF Node     │  • Routes based on threat score
-│              │  • TRUE: High Risk (≥60) → Enrichment
-│              │  • FALSE: Low Risk (<60) → Archive
-└──────┬───────┘
-       │
-       ▼ (TRUE branch only)
-┌──────────────┐
-│   Stage 4    │  External Enrichment
-│ VirusTotal   │  • Scans extracted domains
-│     API      │  • Checks against 95+ AV engines
-│              │  • Returns malicious/suspicious/clean
-└──────┬───────┘
-       │
-       ▼
-┌──────────────┐
-│   Stage 5    │  AI Re-Analysis (Final)
-│  Claude 4    │  • Reviews initial assessment
-│   Sonnet     │  • Incorporates VirusTotal data
-│              │  • Updates threat score
-│              │  • Makes final recommendation
-└──────┬───────┘
-       │
-       ▼
-┌──────────────┐
-│   Stage 6    │  Reporting & Alerting
-│  Output      │  • Generates detailed report
-│  Handler     │  • Sends alerts to SOC team
-│              │  • Logs for audit trail
-└──────────────┘
+┌─────────────┐
+│   Gmail     │  Monitors inbox every 5 minutes
+└──────┬──────┘
+       ↓
+┌─────────────┐
+│   Claude    │  Analyzes email for phishing indicators
+│     AI      │  Extracts URLs, calculates threat score
+└──────┬──────┘
+       ↓
+┌─────────────┐
+│  Decision   │  Routes based on risk level / URLs found
+│   Logic     │
+└──────┬──────┘
+       ↓
+┌─────────────┐
+│ VirusTotal  │  Checks domain reputation (95+ engines)
+└──────┬──────┘
+       ↓
+┌─────────────┐
+│   Claude    │  Re-analyzes with enriched threat data
+│ (Re-eval)   │  Makes final recommendation
+└──────┬──────┘
+       ↓
+┌─────────────┐
+│   Alert     │  Sends consolidated report to SOC team
+└─────────────┘
 ```
 
 ---
 
-## 🔧 Technical Implementation
+## 🤖 Implementation Approaches
 
-### Technology Stack
-
-- **Orchestration**: n8n (workflow automation platform)
-- **AI Engine**: Anthropic Claude 4 Sonnet via API
-- **Threat Intelligence**: VirusTotal API v3
-- **Email Provider**: Gmail API
-- **Output Format**: JSON → HTML reports
-- **Deployment**: Cloud-based (n8n Cloud) or self-hosted
-
-### Data Flow
-
-1. **Email Metadata** (Gmail) → Structured JSON
-2. **AI Analysis** (Claude) → JSON threat assessment
-3. **String Parsing** (n8n) → Extract risk indicators from Claude response
-4. **Conditional Routing** (IF logic) → Route based on string matching
-5. **HTTP Request** (VirusTotal) → Domain reputation data
-6. **AI Synthesis** (Claude) → Final verdict with evidence
-7. **Report Generation** (HTML) → Human-readable output
+We built two versions to demonstrate different AI agent architectures:
 
 ---
 
-## 🔍 System Components
+## Version 1: Orchestrated Workflow
 
-### Component 1: Schedule Trigger
+**Approach**: n8n orchestrates the workflow - it decides when to call each tool.
 
-**Purpose**: Initiates the workflow at regular intervals
+### Architecture
 
-**Configuration**:
-- **Frequency**: Every 5 minutes
-- **Type**: Time-based cron trigger
+```
+Gmail → Claude Analysis → IF Node → VirusTotal → Claude Re-analysis → Report
+```
 
-**Why This Matters**: Ensures near-real-time phishing detection without overwhelming the email API with constant requests.
+### How It Works
+
+**Step 1: Email Ingestion**
+- Gmail node fetches unread emails every 5 minutes
+- Filters for new messages only
+- Structures data as JSON
+
+**Step 2: Initial AI Analysis**
+- Claude analyzes email content for phishing indicators
+- Extracts URLs and domains
+- Calculates initial threat score (0-100)
+- Returns JSON with risk level and reasoning
+
+**Prompt Example**:
+```
+Analyze this email for phishing:
+From: {{ email.from }}
+Subject: {{ email.subject }}
+Body: {{ email.text }}
+
+Extract URLs and provide threat score (0-100).
+```
+
+**Step 3: Decision Routing (IF Node)**
+- n8n checks if URLs are present in Claude's response
+- Routes to VirusTotal if URLs found
+- Skips external check if no URLs
+
+**Condition**: Contains `"urls": ["`
+
+**Step 4: VirusTotal Enrichment**
+- HTTP Request node calls VirusTotal API
+- Checks domain reputation against 95+ antivirus engines
+- Returns malicious/suspicious/clean verdict
+
+**Step 5: Final Analysis**
+- Claude receives original assessment + VirusTotal data
+- Updates threat score based on external intelligence
+- Provides final recommendation (Allow/Quarantine/Block)
+
+**Step 6: Reporting**
+- Code node formats results into readable report
+- Gmail node sends consolidated alert to SOC team
+- Includes threat scores, verdicts, and reasoning
+
+### Pros
+- ✅ Explicit control over workflow logic
+- ✅ Easy to debug and visualize
+- ✅ Deterministic routing
+- ✅ Simple to understand and modify
+
+### Cons
+- ❌ n8n decides when to call tools, not the AI
+- ❌ Fixed workflow - can't adapt dynamically
+- ❌ Adding new tools requires workflow changes
 
 ---
 
-### Component 2: Gmail - Get Many Messages
+## Version 2: MCP Agent
 
-**Purpose**: Fetches unread emails from monitored mailbox
+**Approach**: Claude autonomously decides when and which tools to use.
 
-**Configuration**:
-- **Operation**: `Get Many`
-- **Filters**: `UNREAD` label only
-- **Limit**: 10 emails per execution
-- **Simplify**: Enabled (for cleaner data structure)
+### What is MCP?
 
-**Output Data Structure**:
-```json
-{
-  "id": "email_id_here",
-  "threadId": "thread_id",
-  "subject": "Email Subject",
-  "from": "sender@example.com",
-  "text": "Email body content...",
-  "snippet": "Preview of email...",
-  "date": "2025-10-24T14:30:00Z",
-  "labels": ["INBOX", "UNREAD"]
-}
+**Model Context Protocol (MCP)** is Anthropic's standard for AI agents to autonomously use tools. Instead of hardcoded logic, the AI decides:
+- When to call a tool
+- Which tool to call
+- What parameters to use
+- When to stop and provide a final answer
+
+### Architecture
+
+```
+Gmail → AI Agent (Claude + Tools) → Report
 ```
 
-**Why This Matters**: Focuses analysis only on new, unseen emails, preventing duplicate processing and reducing API costs.
+### How It Works
+
+**Step 1: Email Ingestion** (Same as V1)
+- Gmail monitors and fetches emails
+
+**Step 2: AI Agent with Tool Access**
+- Claude receives email and tool descriptions
+- AI Agent node provides Claude with available tools:
+  - `check_virustotal`: Domain reputation lookup
+
+**Tool Definition**:
+```
+Name: check_virustotal
+Description: Check if a domain is malicious using VirusTotal
+Parameters:
+  - domain (string): Domain to check (e.g., example.com)
+```
+
+**Step 3: Autonomous Tool Use**
+- Claude analyzes email and extracts URLs
+- **Claude decides** to call VirusTotal when suspicious URLs found
+- n8n executes the tool call and returns results to Claude
+- Claude synthesizes findings and provides verdict
+
+**Example Flow**:
+```
+User: "Analyze this email"
+Claude: "I see a suspicious URL: paypal-verify.tk"
+Claude: [Calls check_virustotal("paypal-verify.tk")]
+System: [Returns VT data showing 12/95 engines flag as malicious]
+Claude: "CRITICAL - Domain flagged by multiple engines. Recommend: Block"
+```
+
+**Step 4: Report Generation** (Same as V1)
+- Formats and sends consolidated alert
+
+### Pros
+- ✅ True AI agent behavior - Claude decides tool use
+- ✅ Can adapt to different email types dynamically
+- ✅ Easy to add new tools without changing workflow logic
+- ✅ More intelligent - considers context before calling tools
+
+### Cons
+- ❌ Less predictable (AI decides what to do)
+- ❌ Slightly higher latency (decision-making overhead)
+- ❌ Requires careful tool descriptions
 
 ---
 
-### Component 3: Basic LLM Chain (Initial Analysis)
+## Key Differences: V1 vs V2
 
-**Purpose**: First-pass AI analysis to identify potential phishing indicators
+| Aspect | Orchestrated (V1) | MCP Agent (V2) |
+|--------|------------------|----------------|
+| **Decision Making** | n8n decides | Claude decides |
+| **Tool Calling** | Fixed IF logic | Dynamic, context-aware |
+| **Workflow** | Hardcoded sequence | Adaptive behavior |
+| **Complexity** | Simple, explicit | More sophisticated |
+| **Debugging** | Easy to trace | Requires examining AI reasoning |
+| **Scalability** | Add nodes manually | Add tools, AI handles rest |
+| **Use Case** | Production-ready, predictable | Flexible, intelligent |
 
-**Model**: Anthropic Claude 4 Sonnet
+### When to Use Each
 
-**Prompt Template**:
-```
-You are an elite cybersecurity analyst for a government SOC. 
-Analyze this email for nation-state phishing tactics.
+**Use Orchestrated (V1)** when:
+- You need predictable, deterministic behavior
+- Workflow is well-defined and unlikely to change
+- Debugging and observability are critical
+- Compliance requires explicit control
 
-EMAIL DATA:
-From: {{ $json.from }}
-Subject: {{ $json.subject }}
-Date: {{ $json.date }}
-Body: {{ $json.text || $json.snippet }}
-
-ANALYSIS PROTOCOL:
-1. Extract all URLs and domains
-2. Identify social engineering tactics
-3. Check for impersonation attempts
-4. Look for urgency manipulation
-5. Assess sender legitimacy
-6. Calculate threat score (0-100)
-
-Think step-by-step. Provide your assessment in JSON:
-{
-  "threatScore": 0-100,
-  "riskLevel": "Low|Medium|High|Critical",
-  "indicators": ["list", "of", "red", "flags"],
-  "urls": ["extracted", "urls"],
-  "recommendation": "Block|Quarantine|Allow",
-  "explanation": "detailed reasoning"
-}
-```
-
-**Output Example**:
-```json
-{
-  "threatScore": 85,
-  "riskLevel": "High",
-  "indicators": [
-    "Generic greeting 'Dear Valued Customer'",
-    "Creates urgency with 24-hour deadline",
-    "Suspicious domain mismatch",
-    "Requests identity verification"
-  ],
-  "urls": ["https://suspicious-domain.com/verify"],
-  "recommendation": "Block",
-  "explanation": "Classic phishing indicators including urgency tactics..."
-}
-```
-
-**Why This Works**:
-- **Contextual Understanding**: Claude processes natural language with human-level comprehension
-- **Pattern Recognition**: Identifies sophisticated social engineering tactics
-- **URL Extraction**: Automatically finds malicious links even in obfuscated formats
-- **Explainability**: Provides reasoning for every decision
-
-**Key Design Decisions**:
-- Used "government SOC" framing to encourage thorough analysis
-- Requested step-by-step thinking for better reasoning
-- Structured JSON output for programmatic processing
-- Included confidence scoring for risk-based routing
+**Use MCP Agent (V2)** when:
+- You want adaptive, intelligent behavior
+- Email types vary significantly
+- You plan to add many tools
+- You want cutting-edge AI agent capabilities
 
 ---
 
-### Component 4: IF Node (Decision Router)
-
-**Purpose**: Routes emails based on initial threat assessment
-
-**Configuration**:
-- **Condition Type**: String Contains
-- **Value 1**: `{{ $json.text }}`
-- **Operation**: Contains
-- **Value 2**: `"riskLevel": "HIGH"`
-
-**Logic**:
-```
-IF email contains "HIGH" risk level:
-    → TRUE branch (proceed to enrichment)
-ELSE:
-    → FALSE branch (low-risk, archive)
-```
-
-**Why String Matching?**:
-The Claude response is wrapped in markdown code blocks (```json...```), so we parse by searching for the "HIGH" string rather than extracting the JSON field. This is simpler and more reliable for this workflow.
-
-**Alternative Approaches Considered**:
-- JSON parsing with regex: More fragile
-- Threshold on numeric score: Required additional parsing
-- Multiple conditions: Added unnecessary complexity
-
-**Routing Outcomes**:
-- **TRUE**: High/Critical risk → Continue to VirusTotal enrichment
-- **FALSE**: Low/Medium risk → Could be archived, logged, or sent to different workflow
-
----
-
-### Component 5: HTTP Request - VirusTotal
-
-**Purpose**: External threat intelligence lookup for suspicious domains
-
-**Configuration**:
-- **Method**: GET
-- **URL**: `https://www.virustotal.com/api/v3/domains/bensmith.com`
-- **Authentication**: Header Auth
-  - **Header Name**: `x-apikey`
-  - **Header Value**: `[VirusTotal API Key]`
-- **Send Headers**: Enabled
-
-**API Response Structure**:
-```json
-{
-  "data": {
-    "id": "bensmith.com",
-    "type": "domain",
-    "attributes": {
-      "last_analysis_stats": {
-        "harmless": 63,
-        "malicious": 0,
-        "suspicious": 0,
-        "undetected": 32
-      },
-      "reputation": 0,
-      "last_analysis_date": 1729785600,
-      "creation_date": 852163200
-    }
-  }
-}
-```
-
-**What VirusTotal Provides**:
-- **Crowd-Sourced Intelligence**: Results from 95+ antivirus engines
-- **Historical Data**: Domain age, registration info
-- **Reputation Score**: Community-driven trust ratings
-- **Real-Time Scanning**: Up-to-date threat status
-
-**Why VirusTotal**:
-- **Free Tier**: 4 requests/minute, 500/day (sufficient for demo)
-- **High Accuracy**: Combines multiple detection engines
-- **Well-Documented API**: Easy integration
-- **Industry Standard**: Trusted by security professionals globally
-
-**Limitations & Considerations**:
-- **Rate Limits**: Free tier has request caps
-- **False Negatives**: Very new domains may not be indexed
-- **Privacy**: Queries are logged by VirusTotal
-- **Production Alternative**: Could add WHOIS, URLScan.io, or internal threat feeds
-
----
-
-### Component 6: Basic LLM Chain (Final Analysis)
-
-**Purpose**: Re-evaluate threat with enriched VirusTotal data
-
-**Model**: Anthropic Claude 4 Sonnet
-
-**Prompt Template**:
-```
-You previously analyzed an email and found it HIGH RISK.
-
-Now we have VirusTotal scan results for the suspicious domain.
-
-VIRUSTOTAL DATA:
-{{ JSON.stringify($json, null, 2) }}
-
-Based on this external threat intelligence, provide your FINAL assessment:
-- Did VirusTotal confirm it's malicious?
-- Should we change the threat score?
-- What's your final recommendation?
-
-Respond in JSON:
-{
-  "finalThreatScore": 0-100,
-  "virusTotalVerdict": "Confirmed malicious / Clean / Suspicious",
-  "finalRecommendation": "Block|Quarantine|Allow",
-  "reasoning": "brief explanation"
-}
-```
-
-**Example Output**:
-```json
-{
-  "finalThreatScore": 15,
-  "virusTotalVerdict": "Clean",
-  "finalRecommendation": "Allow",
-  "reasoning": "VirusTotal scan shows 0/95 engines flagged as malicious. Domain registered in 1996 with legitimate SSL. Initial HIGH RISK was due to suspicious email characteristics, but domain itself is not compromised."
-}
-```
-
-**Why This Step Is Critical**:
-This demonstrates **agent-like reasoning** where the AI:
-1. **Recalls Context**: References its previous analysis
-2. **Incorporates New Data**: Integrates VirusTotal findings
-3. **Updates Beliefs**: Can change its assessment based on evidence
-4. **Explains Changes**: Shows what led to the new conclusion
-
-**Real-World Example from Testing**:
-- Initial Assessment: 85/100 (HIGH RISK - suspicious email)
-- VirusTotal Result: 0/95 malicious flags
-- Final Assessment: 15/100 (LOW RISK - legitimate domain, email filtering only)
-- **The AI changed its mind based on facts!**
-
----
-
-## 📊 Workflow Breakdown
-
-### Full Execution Flow
-
-#### Step 1: Email Ingestion (Every 5 minutes)
-
-1. Schedule trigger fires
-2. n8n calls Gmail API
-3. Fetches up to 10 unread emails
-4. Gmail returns structured JSON for each email
-
-**Processing Time**: ~2-3 seconds per batch
-
----
-
-#### Step 2: Initial AI Analysis
-
-For each email:
-
-1. Email data passed to Claude via Anthropic API
-2. Claude analyzes:
-   - Sender legitimacy
-   - Subject line tactics
-   - Body content for social engineering
-   - URL patterns
-   - Urgency indicators
-3. Generates threat score (0-100)
-4. Returns JSON with indicators and recommendation
-
-**Processing Time**: ~3-5 seconds per email
-
-**AI Reasoning Process**:
-```
-1. Parse email structure and metadata
-2. Extract all URLs and domains
-3. Identify urgency language ("24 hours", "immediate action")
-4. Check for sender/domain mismatches
-5. Assess request legitimacy (password resets, verifications)
-6. Calculate weighted threat score
-7. Generate human-readable explanation
-```
-
----
-
-#### Step 3: Risk-Based Routing
-
-1. IF node receives Claude's response text
-2. Searches for string `"riskLevel": "HIGH"`
-3. Routes to appropriate branch:
-   - **TRUE**: Proceed to enrichment
-   - **FALSE**: Archive or log (end workflow)
-
-**Why This Matters**: Only high-risk emails consume VirusTotal API quota, optimizing resource usage.
-
----
-
-#### Step 4: External Enrichment (HIGH RISK only)
-
-1. Extract domain from Claude's analysis
-2. HTTP Request to VirusTotal API
-3. VirusTotal scans domain against 95+ engines
-4. Returns reputation data and malicious flags
-
-**What VirusTotal Checks**:
-- Antivirus engine detections
-- WHOIS registration data
-- SSL certificate validity
-- Historical threat activity
-- Community reputation scores
-
-**Processing Time**: ~2-4 seconds per domain
-
----
-
-#### Step 5: Final AI Re-Assessment
-
-1. Claude receives:
-   - Original email data (context)
-   - Initial threat assessment (previous analysis)
-   - VirusTotal scan results (new evidence)
-
-2. Claude performs synthesis:
-   - Compares initial suspicions with hard data
-   - Identifies false positives (legitimate domains)
-   - Confirms true positives (malicious confirmed)
-   - Adjusts threat score based on evidence
-
-3. Generates final verdict with updated reasoning
-
-**Example Reasoning**:
-```
-Initial: "Suspicious domain, urgency tactics → 85/100"
-After VT: "Domain clean (0/95 flags), registered 1996 → 15/100"
-Verdict: "Email suspicious but domain legitimate → Allow with caution"
-```
-
-**Processing Time**: ~3-5 seconds
-
----
-
-#### Step 6: Reporting (Optional - Can Be Extended)
-
-Current implementation can:
-- Generate HTML reports with threat details
-- Email alerts to SOC team
-- Log to database for analytics
-- Create JIRA/ServiceNow tickets
-
----
-
-## 🚀 Setup Instructions
+## 🚀 Setup Guide
 
 ### Prerequisites
 
-- n8n account (cloud or self-hosted)
-- Anthropic API key (Claude 4 access)
-- VirusTotal API key (free tier)
-- Gmail account with API access enabled
+- n8n (cloud or self-hosted)
+- Anthropic API key ([console.anthropic.com](https://console.anthropic.com))
+- VirusTotal API key ([virustotal.com](https://www.virustotal.com))
+- Gmail account with API access
 
-### Step 1: Clone and Import
+### Quick Start
 
-1. Clone this repository
-2. In n8n, import the workflow JSON file
-3. All nodes will appear in the canvas
+**1. Clone Repository**
+```bash
+git clone [your-repo]
+cd ai-phishing-detector
+```
 
-### Step 2: Configure Credentials
+**2. Import to n8n**
+- Open n8n
+- Import workflow JSON file
+- Choose version: `orchestrated-workflow.json` or `mcp-agent.json`
 
-**Gmail:**
-1. In n8n, add Gmail OAuth2 credential
-2. Authorize access to your Gmail account
+**3. Configure Credentials**
 
-**Anthropic:**
-1. Get API key from console.anthropic.com
-2. In n8n, add Anthropic credential
-3. Paste API key
+Gmail:
+- Add Gmail OAuth2 credential
+- Authorize access
 
-**VirusTotal:**
-1. Sign up at virustotal.com
-2. Get API key from profile settings
-3. In n8n, create Header Auth credential:
-   - Name: `x-apikey`
-   - Value: [Your API key]
+Anthropic:
+- Add API key from console.anthropic.com
 
-### Step 3: Configure Email Monitoring
+VirusTotal:
+- Sign up at virustotal.com
+- Get API key
+- Add as Header Auth credential (`x-apikey`)
 
-In Gmail node:
-- Set desired email filters (e.g., specific labels)
-- Adjust limit based on volume
-- Configure marking as read (optional)
+**4. Test**
+- Send test phishing email to monitored inbox
+- Execute workflow manually
+- Verify alert received
 
-### Step 4: Test the Workflow
+**5. Activate**
+- Toggle workflow to "Active"
+- Runs automatically every 5 minutes
 
-1. Send a test phishing email to monitored account
-2. Click "Execute workflow" in n8n
-3. Observe data flow through each node
-4. Verify outputs at each stage
+---
 
-### Step 5: Activate for Production
+## 📊 Performance
 
-1. Toggle workflow to "Active"
-2. Schedule will run automatically
-3. Monitor execution logs
-4. Set up alerting for failures
+### Detection Capabilities
+- **Accuracy**: 85%+ detection of sophisticated phishing
+- **False Positives**: <5% in testing
+- **Processing Time**: 8-15 seconds per email
+
+### Resource Usage
+- **VirusTotal**: ~10-20 API calls/day (well under free tier limit)
+- **Anthropic**: $0.01-0.03 per email
+- **n8n**: Minimal compute overhead
+
+### Scalability
+- **Current**: 2,880 emails/day (10 per 5-min cycle)
+- **Potential**: Thousands with rate limit management
+- **Parallel**: Can process batches simultaneously
 
 ---
 
 ## 🔮 Future Enhancements
 
-### Planned Features
+### Additional Tools
+- **WHOIS** - Domain age and registration verification
+- **URLScan.io** - Screenshot capture and analysis
+- **Passive DNS** - Infrastructure mapping
+- **Certificate Transparency** - SSL certificate validation
 
-**Multi-Tool Integration:**
-- WHOIS lookups for domain age verification
-- URLScan.io for screenshot capture
-- Passive DNS for infrastructure mapping
-- Certificate transparency logs
+### Advanced Features
+- **Header Analysis** - SPF/DKIM/DMARC validation
+- **Attachment Sandboxing** - File analysis in isolated environment
+- **Image OCR** - Extract text from phishing screenshots
+- **Link Unfurling** - Follow redirect chains
 
-**True MCP Implementation:**
-- Let Claude autonomously choose which tools to call
-- Implement tool schemas and descriptions
-- Enable dynamic tool selection based on email content
+### Intelligence & Learning
+- **Feedback Loop** - Learn from analyst corrections
+- **Campaign Clustering** - Group related attacks
+- **Anomaly Detection** - Detect account compromise patterns
 
-**Advanced Analysis:**
-- Header analysis for SPF/DKIM/DMARC validation
-- Attachment sandboxing integration
-- Image OCR for phishing page screenshots
-- Link unfurling and redirect chain analysis
-
-**Machine Learning Enhancement:**
-- Feedback loop from analyst verdicts
-- Pattern recognition across campaigns
-- Anomaly detection for account compromise
-
-**Automated Response:**
-- Quarantine integration with email gateway
-- Automated user notifications
-- Threat intelligence feed updates
-- IOC extraction and sharing
-
-**Reporting & Analytics:**
-- Dashboard for threat trends
-- Campaign clustering and attribution
-- Executive summary generation
-- Integration with SIEM platforms
+### Integration
+- **Email Gateway** - Automatic quarantine
+- **SIEM** - Feed detection events to security platform
+- **Ticketing** - Auto-create JIRA/ServiceNow tickets
+- **Threat Feeds** - Share IOCs with community
 
 ---
 
-## 🛠️ Technologies Used
+## 🛠️ Technology Stack
 
 | Component | Technology | Purpose |
 |-----------|-----------|---------|
-| Orchestration | n8n | Workflow automation and integration |
-| AI Engine | Claude 4 Sonnet | Natural language understanding and reasoning |
-| Threat Intel | VirusTotal API | Domain reputation and malware detection |
-| Email | Gmail API | Email ingestion and monitoring |
-| Authentication | OAuth2 / API Keys | Secure service access |
-| Data Format | JSON | Structured data exchange |
-| Reporting | HTML/Markdown | Human-readable output |
+| **Orchestration** | n8n | Workflow automation |
+| **AI Engine** | Claude 4 Sonnet | Analysis and reasoning |
+| **Threat Intel** | VirusTotal API | Domain reputation |
+| **Email** | Gmail API | Email monitoring |
+| **Reporting** | HTML/JSON | Alert generation |
 
 ---
 
-## 📈 Performance Metrics
+## 📈 Sample Results
 
-**Detection Capabilities:**
-- Identifies 85%+ of sophisticated phishing attempts
-- Low false positive rate (<5% in testing)
-- Processes emails in 8-15 seconds end-to-end
+### Example: Confirmed Phishing
 
-**Resource Usage:**
-- VirusTotal: ~10-20 API calls per day (well under free limit)
-- Anthropic: ~$0.01-0.03 per email analyzed
-- n8n: Minimal compute overhead
+**Email**:
+```
+From: security@paypa1-verify.com
+Subject: URGENT: Account Suspended
 
-**Scalability:**
-- Current: 10 emails per 5-minute cycle = 2,880 emails/day
-- Can scale to thousands with rate limit management
-- Parallel processing possible for high volumes
+Your account will be deleted in 24 hours:
+https://paypa1-verify.com/confirm?id=12345
+```
+
+**Analysis**:
+- **Initial Score**: 95/100 (HIGH)
+- **Indicators**: Typosquatting (paypa1), urgency, suspicious link
+- **VirusTotal**: 12/95 engines flag as malicious
+- **Final Verdict**: BLOCK immediately
+
+---
+
+### Example: False Positive Prevention
+
+**Email**:
+```
+From: notifications@company.com
+Subject: Quarterly Review Meeting
+
+Please review attached document before tomorrow's meeting.
+```
+
+**Analysis**:
+- **Initial Score**: 25/100 (LOW)
+- **No URLs**: Skipped VirusTotal check
+- **Context**: Legitimate internal communication
+- **Final Verdict**: ALLOW
 
 ---
 
 ## 🤝 Contributing
 
-This project was built as a demonstration of AI-augmented security workflows. Contributions welcome!
-
-**Areas for Contribution:**
+Contributions welcome! Areas of interest:
 - Additional threat intelligence integrations
-- Improved prompt engineering
-- Extended reporting capabilities
+- Improved detection accuracy
+- New reporting formats
 - Performance optimizations
-- Documentation improvements
 
 ---
 
 ## 📄 License
 
-MIT License - Feel free to use, modify, and distribute.
+MIT License - See LICENSE file for details
 
 ---
 
 ## 🙏 Acknowledgments
 
-- **Anthropic** for Claude API and MCP inspiration
-- **VirusTotal** for free threat intelligence access
-- **n8n** for powerful workflow automation platform
-- Security community for threat research and patterns
+- **Anthropic** - Claude AI and MCP framework
+- **VirusTotal** - Free threat intelligence API
+- **n8n** - Powerful workflow automation
+- **Security Community** - Research and threat patterns
 
 ---
 
 ## 📞 Contact
 
-For questions, issues, or collaboration:
-- GitHub Issues: [Your Repository]
-- Email: [Your Email]
-- LinkedIn: [Your Profile]
+- GitHub Issues: Report bugs and request features
+- Email: [your-email]
+- LinkedIn: [your-profile]
 
 ---
 
-**Built with 🧠 AI, ⚡ Automation, and 🔐 Security in Mind**
+**Built with 🧠 AI, ⚡ Automation, and 🔐 Security**
 
----
-
-## Appendix A: Sample Detection Scenarios
-
-### Scenario 1: Confirmed Phishing
-
-**Email**:
-```
-From: security@paypa1-verify.com
-Subject: URGENT: Account Suspended - Verify Now
-
-Your account will be deleted in 24 hours unless you verify:
-https://paypa1-verify.com/confirm?id=user123
-```
-
-**Initial Analysis**:
-- Threat Score: 95/100
-- Indicators: Domain typosquatting (paypa1 vs paypal), urgency, suspicious link
-- Recommendation: BLOCK
-
-**VirusTotal**: 12/95 engines flag domain as phishing
-
-**Final Verdict**: BLOCK - Confirmed malicious
-
----
-
-### Scenario 2: False Positive (Legitimate)
-
-**Email**:
-```
-From: max@company.com
-Subject: Quarterly Review Meeting
-
-Please review the attached document before our meeting tomorrow.
-```
-
-**Initial Analysis**:
-- Threat Score: 25/100
-- Indicators: Generic request, attachment mention
-- Recommendation: Allow
-
-**Routing**: Low risk, no VirusTotal check needed
-
-**Final Verdict**: ALLOW
-
----
-
-### Scenario 3: Suspicious but Legitimate
-
-**Email**:
-```
-From: noreply@legitimate-company.com
-Subject: Your password reset request
-
-Click here to reset: https://legitimate-company.com/reset?token=abc123
-```
-
-**Initial Analysis**:
-- Threat Score: 70/100
-- Indicators: Unsolicited password reset, generic sender
-- Recommendation: Quarantine
-
-**VirusTotal**: 0/95 flags, domain registered 2005, valid SSL
-
-**Final Verdict**: QUARANTINE - Legitimate domain but unsolicited action (potential account takeover attempt)
-
----
-
-## Appendix B: Threat Scoring Methodology
-
-Claude uses weighted indicators to calculate threat scores:
-
-| Indicator | Weight | Example |
-|-----------|--------|---------|
-| Domain mismatch | +30 | paypa1.com vs paypal.com |
-| Urgency language | +20 | "Act now", "24 hours" |
-| Generic greeting | +15 | "Dear Customer" |
-| Suspicious links | +25 | Shortened URLs, IP addresses |
-| Spelling errors | +10 | "secuirty", "verifiy" |
-| Legitimate branding | -20 | Proper logos, formatting |
-| Known sender | -30 | Previous correspondence |
-| Valid domain | -40 | VirusTotal clean |
-
-**Score Ranges**:
-- 0-30: Low Risk (Allow)
-- 31-60: Medium Risk (Monitor)
-- 61-85: High Risk (Quarantine)
-- 86-100: Critical (Block)
-
+*Protecting inboxes, one email at a time.*
