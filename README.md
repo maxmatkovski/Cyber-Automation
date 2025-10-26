@@ -25,7 +25,7 @@ AI Phishing Detector is an intelligent security automation system that protects 
 
 ### Key Features
 
-- **Automated Email Monitoring** - Continuous surveillance every 6 hours
+- **Automated Email Monitoring** - Continuous surveillance every 5 minutes
 - **AI-Powered Analysis** - Claude 4 Sonnet analyzes context and intent
 - **External Threat Intelligence** - Real-time domain reputation via VirusTotal
 - **Multi-Step Reasoning** - Analyzes, enriches with data, re-evaluates
@@ -34,6 +34,8 @@ AI Phishing Detector is an intelligent security automation system that protects 
 ---
 
 ## 🔴 The Problem
+
+![Phishing Photo](Images/Image1.png)
 
 Modern phishing attacks bypass traditional defenses through:
 
@@ -107,6 +109,8 @@ We built two versions to demonstrate different AI agent architectures:
 ---
 
 ## Version 1: Orchestrated Workflow
+
+![AI Agent V1](Images/Image3.png)
 
 **Approach**: n8n orchestrates the workflow - it decides when to call each tool.
 
