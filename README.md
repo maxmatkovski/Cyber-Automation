@@ -166,8 +166,7 @@ Extract URLs and provide threat score (0-100).
 - Includes threat scores, verdicts, and reasoning
 
 Example of what a generated threat report looks like.
-![Threat Report](Images/Image4.png)
-
+![Threat Report](Images/ThreatReportV1.png)
 
 ### Pros
 - ✅ Explicit control over workflow logic
@@ -235,6 +234,8 @@ Claude: "CRITICAL - Domain flagged by multiple engines. Recommend: Block"
 
 **Step 4: Report Generation** (Same as V1)
 - Formats and sends consolidated alert
+![alt text](Images/ThreatReportV2.png)
+
 
 ### Pros
 - ✅ True AI agent behavior - Claude decides tool use
@@ -246,6 +247,8 @@ Claude: "CRITICAL - Domain flagged by multiple engines. Recommend: Block"
 - ❌ Less predictable (AI decides what to do)
 - ❌ Slightly higher latency (decision-making overhead)
 - ❌ Requires careful tool descriptions
+
+
 
 ---
 
