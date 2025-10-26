@@ -37,6 +37,12 @@ AI Phishing Detector is an intelligent security automation system that protects 
 
 ![Phishing Photo](Images/image.png)
 
+- The Anti-Phishing Working Group recorded 1,003,924 phishing attacks in Q1 2025, the highest since late 2023.
+
+- Over 3.4 billion phishing emails are sent daily, accounting for 1.2% of global email traffic.
+
+- More than 90% of successful cyber attacks start with phishing emails, with over 1.13 million phishing attacks reported in Q2 2025.
+
 Modern phishing attacks bypass traditional defenses through:
 
 1. **Sophisticated Social Engineering** - Personalized, context-aware messages
