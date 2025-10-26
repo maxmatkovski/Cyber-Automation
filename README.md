@@ -35,7 +35,6 @@ AI Phishing Detector is an intelligent security automation system that protects 
 
 ## 🔴 The Problem
 
-![alt text](Images/Statistics.png)
 ![Phishing Photo](Images/image.png)
 
 Modern phishing attacks bypass traditional defenses through:
@@ -281,57 +280,10 @@ Claude: "CRITICAL - Domain flagged by multiple engines. Recommend: Block"
 
 ---
 
-## 🚀 Setup Guide
-
-### Prerequisites
-
-- n8n (cloud or self-hosted)
-- Anthropic API key ([console.anthropic.com](https://console.anthropic.com))
-- VirusTotal API key ([virustotal.com](https://www.virustotal.com))
-- Gmail account with API access
-
-### Quick Start
-
-**1. Clone Repository**
-```bash
-git clone [your-repo]
-cd ai-phishing-detector
-```
-
-**2. Import to n8n**
-- Open n8n
-- Import workflow JSON file
-- Choose version: `orchestrated-workflow.json` or `mcp-agent.json`
-
-**3. Configure Credentials**
-
-Gmail:
-- Add Gmail OAuth2 credential
-- Authorize access
-
-Anthropic:
-- Add API key from console.anthropic.com
-
-VirusTotal:
-- Sign up at virustotal.com
-- Get API key
-- Add as Header Auth credential (`x-apikey`)
-
-**4. Test**
-- Send test phishing email to monitored inbox
-- Execute workflow manually
-- Verify alert received
-
-**5. Activate**
-- Toggle workflow to "Active"
-- Runs automatically every 5 minutes
-
----
-
 ## 📊 Performance
 
 ### Detection Capabilities
-- **Accuracy**: 85%+ detection of sophisticated phishing
+- **Accuracy**: Very accurate detection of sophisticated phishing both social engineering and corrupted urls.
 - **False Positives**: <5% in testing
 - **Processing Time**: 8-15 seconds per email
 
