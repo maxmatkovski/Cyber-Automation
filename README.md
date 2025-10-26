@@ -35,7 +35,7 @@ AI Phishing Detector is an intelligent security automation system that protects 
 
 ## 🔴 The Problem
 
-![Phishing Photo](Images/Image1.png)
+![Phishing Photo](Images/image.png)
 
 Modern phishing attacks bypass traditional defenses through:
 
