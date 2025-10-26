@@ -14,6 +14,8 @@ Unlike traditional rule-based systems, the AI agent makes intelligent decisions 
 
 ## 🔴 The Problem
 
+![Description](Images/image.png)
+
 Modern phishing attacks are increasingly sophisticated:
 
 - **1,003,924 phishing attacks** recorded in Q1 2025 (Anti-Phishing Working Group)
