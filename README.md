@@ -215,7 +215,9 @@ Full Analysis:
 
 ---
 
-### Step 5: SOC Alert (Gmail Send)
+### Step 5: SOC Alert!
+
+[alt text](<Screenshot 2025-10-27 at 12.19.47 AM.png>) (Gmail Send)
 
 **Purpose**: Notify security team  
 **Action**: Send consolidated report to SOC email  
