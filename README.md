@@ -14,7 +14,7 @@ Unlike traditional rule-based systems, the AI agent makes intelligent decisions 
 
 ## 🔴 The Problem
 
-<img src="Images/Image1.png" alt="Diagram" height="300">
+<img src="Images/Image1.png" height="300">
 
 Modern phishing attacks are increasingly sophisticated:
 
