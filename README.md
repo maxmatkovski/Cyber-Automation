@@ -14,7 +14,7 @@ Unlike traditional rule-based systems, the AI agent makes intelligent decisions 
 
 ## 🔴 The Problem
 
-![Description](Images/image.png)
+<img src="Images/Image1.png" alt="Diagram" height="300">
 
 Modern phishing attacks are increasingly sophisticated:
 
@@ -33,6 +33,8 @@ Organizations need a system that thinks like a security analyst, operates 24/7, 
 ---
 
 ## ✅ The Solution: Autonomous AI Agent
+
+![alt text](Images/Image2.png)
 
 This implementation uses Claude AI as an autonomous agent that:
 
