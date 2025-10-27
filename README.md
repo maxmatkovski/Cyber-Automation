@@ -217,7 +217,7 @@ Full Analysis:
 
 ### Step 5: SOC Alert!
 
-[alt text](<Screenshot 2025-10-27 at 12.19.47 AM.png>) (Gmail Send)
+[Soc Alert](Images/Image3.png)
 
 **Purpose**: Notify security team  
 **Action**: Send consolidated report to SOC email  
@@ -226,6 +226,9 @@ Full Analysis:
 - Original email details
 - AI reasoning
 - Recommended action
+
+
+[![Watch the video](https://img.youtube.com/vi/dgTU9gX8DIs/0.jpg)](https://www.youtube.com/watch?v=dgTU9gX8DIs)
 
 ---
 
