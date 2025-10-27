@@ -217,7 +217,7 @@ Full Analysis:
 
 ### Step 5: SOC Alert!
 
-[Soc Alert](Images/Image3.png)
+! [Soc Alert](Images/Image3.png)
 
 **Purpose**: Notify security team  
 **Action**: Send consolidated report to SOC email  
@@ -228,6 +228,7 @@ Full Analysis:
 - Recommended action
 
 
+### Watch the video run through here:
 [![Watch the video](https://img.youtube.com/vi/dgTU9gX8DIs/0.jpg)](https://www.youtube.com/watch?v=dgTU9gX8DIs)
 
 ---
